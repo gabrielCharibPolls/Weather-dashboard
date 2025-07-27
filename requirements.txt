@@ -10,7 +10,7 @@ uvicorn[standard]
 httpx
 apscheduler
 jinja2
-os-sys
+Jinja2
 apscheduler==3.9.1
 os-sys==0.1.0
 pydantic==2.6.0

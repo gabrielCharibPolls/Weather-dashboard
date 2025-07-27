@@ -8,10 +8,36 @@ from datetime import datetime
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-
+#############################
+#
+#########################################
 API_KEY = "57785c3ee536429cb7e155613252107"
 API_URL = "http://api.weatherapi.com/v1/current.json"
 DATA_FILE = "weather_history.json"
+CITY = "Kraainem"
+
+
+
+if not os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "w") as f:
+        json.dump({}, f)  
+
+
+def fetch_weather_data_and_save(city: str):
+    response = httpx.get(f"{API_URL}?key={API_KEY}&q={city}&lang=fr")
+    """Récupère les données météo pour une ville donnée"""
+    url = f"{API_URL}?key={API_KEY}&q={city}&lang=fr"
+    response = httpx.get(url)
+
+    if response.status_code == 200:
+        response = response.json()
+        temperature = response.data["current"]["temp_c"]
+        humidity = response.data["current"]["humidity"]
+        save_measure(city, temperature, humidity)
+        return response.json()
+
+    else:
+        return None
 
 
 def save_measure(city: str, temperature: float, humidity: int):
@@ -23,49 +49,19 @@ def save_measure(city: str, temperature: float, humidity: int):
             data = json.load(f)
     else:
         data = {}
-
-    if city not in data:
-        data[city] = []
-
-    # Évite de dupliquer la date
-    already_saved = any(entry["date"] == date_str for entry in data[city])
-    if not already_saved:
-        data[city].append({
-            "date": date_str,
-            "temperature": temperature,
-            "humidity": humidity
-        })
-
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
 
 @app.get("/", response_class=HTMLResponse)
-async def fetch_weather(request: Request, city: str = "Kraainem"):
-    url = f"{API_URL}?key={API_KEY}&q={city}&lang=fr"
-    async with httpx.AsyncClient() as client:
-        response = await client.get(url)
-
-    if response.status_code == 200:
-        data = response.json()
-        current = data["current"]
-        temperature = current["temp_c"]
-        humidity = current["humidity"]
-
-        save_measure(city, temperature, humidity)
-
+async def fetch_weather(request: Request, city: str = CITY):
+    if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             history = json.load(f)
-
-        return templates.TemplateResponse("history.html", {
-            "request": request,
-            "city": city,
-            "history": history.get(city, [])
-        })
     else:
-        return templates.TemplateResponse("history.html", {
-            "request": request,
-            "city": city,
-            "history": [],
-            "error": "Impossible de récupérer les données météo."
-        })
+        history = {}
+    return templates.TemplateResponse("history.html", {
+        "request": request,
+        "city": city,
+        "history": history.get(city, [])
+    })

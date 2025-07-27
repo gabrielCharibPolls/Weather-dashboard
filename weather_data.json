@@ -1,0 +1,46 @@
+{
+    "Brussels": [
+        {
+            "date": "2025-07-21",
+            "temperature": 17.4,
+            "condition": "Pluie mod\u00e9r\u00e9e",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/302.png"
+        },
+        {
+            "date": "2025-07-22",
+            "temperature": 17.8,
+            "condition": "Pluie \u00e9parse \u00e0 proximit\u00e9",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/176.png"
+        },
+        {
+            "date": "2025-07-23",
+            "temperature": 17.8,
+            "condition": "Pluie \u00e9parse \u00e0 proximit\u00e9",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/176.png"
+        },
+        {
+            "date": "2025-07-24",
+            "temperature": 16.7,
+            "condition": "Pluie mod\u00e9r\u00e9e",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/302.png"
+        },
+        {
+            "date": "2025-07-25",
+            "temperature": 17.6,
+            "condition": "Pluie forte",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/308.png"
+        },
+        {
+            "date": "2025-07-26",
+            "temperature": 17.4,
+            "condition": "Pluie \u00e9parse \u00e0 proximit\u00e9",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/176.png"
+        },
+        {
+            "date": "2025-07-27",
+            "temperature": 18.2,
+            "condition": "Nuageux",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png"
+        }
+    ]
+}

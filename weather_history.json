@@ -1,0 +1,49 @@
+{
+    "Brussels": [
+        {
+            "date": "2025-07-21",
+            "temperature": 16.1,
+            "humidity": 88
+        },
+        {
+            "date": "2025-07-22",
+            "temperature": 16.2,
+            "humidity": 88
+        },
+        {
+            "date": "2025-07-23",
+            "temperature": 22.1,
+            "humidity": 65
+        },
+        {
+            "date": "2025-07-27",
+            "temperature": 19.1,
+            "humidity": 78
+        }
+    ],
+    "kraainem": [
+        {
+            "date": "2025-07-21",
+            "temperature": 16.1,
+            "humidity": 88
+        },
+        {
+            "date": "2025-07-22",
+            "temperature": 16.1,
+            "humidity": 88
+        },
+        {
+            "date": "2025-07-22",
+            "time": "00:09",
+            "temperature": 16.2,
+            "humidity": 88
+        }
+    ],
+    "Kraainem": [
+        {
+            "date": "2025-07-27",
+            "temperature": 19.2,
+            "humidity": 68
+        }
+    ]
+}

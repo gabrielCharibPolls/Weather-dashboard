@@ -1,17 +1,21 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from contextlib import asynccontextmanager
 import httpx
 import time
 import json
 import os
+from dotenv import load_dotenv
 from datetime import datetime
 import threading
 
+
+load_dotenv()
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-API_KEY = "57785c3ee536429cb7e155613252107"
+API_KEY = os.getenv("API_KEY")
 API_URL = "http://api.weatherapi.com/v1/current.json"
 DATA_FILE = "weather_history.json"
 CITY = "Kraainem"
@@ -53,9 +57,13 @@ def background_fetch_weather():
         fetch_weather_data_and_save(CITY)
         time.sleep(3600)
 
-@app.on_event("startup")
-def start_background_task():
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
     threading.Thread(target=background_fetch_weather, daemon=True).start()
+app = FastAPI(lifespan=lifespan)  
 
 @app.get("/", response_class=HTMLResponse)
 async def fetch_weather(request: Request, city: str = CITY):

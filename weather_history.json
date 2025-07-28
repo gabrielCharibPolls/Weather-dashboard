@@ -144,6 +144,16 @@
             "date": "2025-07-27-22:36:52",
             "temperature": 15.3,
             "humidity": 94
+        },
+        {
+            "date": "2025-07-28-12:57:56",
+            "temperature": 17.2,
+            "humidity": 77
+        },
+        {
+            "date": "2025-07-28-13:00:33",
+            "temperature": 17.2,
+            "humidity": 77
         }
     ]
 }
